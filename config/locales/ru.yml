@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "Пользователь с таким Email уже существует"
+            password:
+              blank: "не может быть пустым"
+            email:
+              blank: "не может быть пустым"
+

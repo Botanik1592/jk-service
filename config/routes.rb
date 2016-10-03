@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
   resources :documents, only: [:index]
-  resources :feedback, only: [:index]
+  resource :feedbacks, only: [:show, :message]
+  post 'feedbacks/message'
   get 'contacts/index'
-  root 'contacts#index'
+
 end
