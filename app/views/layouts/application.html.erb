@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>УК ГОС ЖКС</title>
+
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body style="padding-bottom: 70px; padding-top: 50px">
+    <div class="container">
+      <nav class="navbar navbar-default navbar-fixed-top container"">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><b>УК ГОС ЖКС</b></a>
+          </div>
+
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><%= link_to 'Главная', root_path %></li>
+              <li><%= link_to 'Документы', documents_path %></li>
+              <li><%= link_to 'Контакты', contacts_index_path %></li>
+              <li><%= link_to 'Обратная связь', feedback_index_path %></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li><p class="navbar-text"><small>(812)</small> 755-26-20</p></li>
+              <% if user_signed_in? %>
+                <li><p class="navbar-text">Привет, <%= current_user.first_name %>!</p></li>
+                <li><%= link_to current_user.email, edit_user_registration_path %></li>
+                <li><%= link_to t('nav.exit'), destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to t('nav.enter'), new_user_session_path %></li>
+              <% end %>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <div>
+        <% if notice.present? %>
+          <div id="notice" class="alert alert-success" role="alert"><%= notice %></div>
+        <% end %>
+        <% if alert.present? %>
+          <div class="alert alert-danger" role="alert"><%= alert %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+
+      <div class="navbar-header">
+        <nav class="navbar navbar-default navbar-fixed-bottom container">
+          <div class="container" style="text-align: center;">
+            <p class="navbar-text" style="width: 100%; text-align: center;">
+            <font color="e7e7e7">&copy; 2016 <a href='http://buryka.ru/' target='_blank' class="footer"><font color="e7e7e7">Anton Buryka</font></a>.
+            </p>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+  </body>
+</html>
