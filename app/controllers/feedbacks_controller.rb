@@ -26,7 +26,7 @@ class FeedbacksController < ApplicationController
       render 'show'
     else
       FeedbackMailer.send_message(@user).deliver_now
-      redirect_to "/show", notice: "Ваше сообщение было успешно отправлено!"
+      redirect_to "/feedbacks/show", notice: "Ваше сообщение было успешно отправлено!"
     end
   end
 
