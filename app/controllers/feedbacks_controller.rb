@@ -1,6 +1,7 @@
 class FeedbacksController < ApplicationController
   before_action :authenticate_user!
 
+
   def show
   end
 
@@ -14,8 +15,19 @@ class FeedbacksController < ApplicationController
     current_user.message = params[:message]
     @user = current_user
 
-    FeedbackMailer.send_message(@user).deliver_now
-    redirect_to "/feedbacks/ok"
+    if params[:kvartira].empty?
+      @error = "Поле 'Квартира' должно быть заполнено"
+      render 'show'
+    elsif params[:phone].empty?
+      @error = "Поле 'Телефон' должно быть заполнено"
+      render 'show'
+    elsif params[:message].empty?
+      @error = "Поле 'Сообщение' должно быть заполнено"
+      render 'show'
+    else
+      FeedbackMailer.send_message(@user).deliver_now
+      redirect_to "show", notice: "Ваше сообщение было успешно отправлено!"
+    end
   end
 
 end

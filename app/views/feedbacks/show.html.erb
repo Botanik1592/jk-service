@@ -1,21 +1,29 @@
+<% if @error %>
+  <div class="alert alert-danger" role="alert"><%= @error %></div>
+<% end %>
 <div class="page-header">
-  <h1>Обратная связь<small> <%= current_user.first_name %></small></h1>
+  <h1>Обратная связь<small> </small></h1>
 </div>
-<div class="container">
+<div class="row">
+  <div class="col-md-6">
   <%= form_tag(controller: "feedbacks", action: "message") do %>
-  <%= label_tag(:kvartira, "Квартира №") %><br />
-  <%= number_field_tag :kvartira, "", class: "form-control"%>
+  <big><font color="red">*</font></big> <%= label_tag(:kvartira, "Квартира №:") %><br />
+  <%= text_field_tag :kvartira, current_user.kvartira, class: "form-control", placeholder: "Введите номер квартиры" %>
   <br /><br />
-  <%= label_tag(:phone, "Телефон для связи") %><br />
-  <%= telephone_field_tag :phone, "", class: "form-control"%>
+  <big><font color="red">*</font></big> <%= label_tag(:phone, "Телефон для связи:") %><br />
+  <%= telephone_field_tag :phone, current_user.phone, class: "form-control", placeholder: "Введите номер телефона" %>
   <br /><br />
-  <%= label_tag(:message, "Сообщение") %><br />
-  <%= text_area_tag :message, "", class: "form-control"%>
+  <big><font color="red">*</font></big> <%= label_tag(:message, "Сообщение:") %><br />
+  <%= text_area_tag :message, "", rows: "5", class: "form-control", placeholder: "Введите ваше сообщение"%>
   <br /><br />
   <%= submit_tag("Отправить", class: "btn btn-primary") %>
   <% end %>
+  </div>
 </div>
-
+<div class="container">
+<br />
+Поля помеченные <big><font color="red">*</font></big> должны быть заполнены!
+</div>
 
 
 
