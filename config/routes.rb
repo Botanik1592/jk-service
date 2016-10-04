@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :documents, only: [:index]
   resource :feedbacks, only: [:show, :message]
   post 'feedbacks/message'
+  get 'feedbacks/ok'
   get 'contacts/index'
 
 end

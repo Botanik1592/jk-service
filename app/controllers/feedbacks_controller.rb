@@ -4,13 +4,18 @@ class FeedbacksController < ApplicationController
   def show
   end
 
+  def ok
+    @user = current_user
+  end
+
   def message
-    @user_name = params[:name]
-    @user_phone = params[:phone]
-    @user_kv = params[:kvartira]
-    @user_message = params[:message]
+    current_user.phone = params[:phone]
+    current_user.kvartira = params[:kvartira]
+    current_user.message = params[:message]
+    @user = current_user
 
-
+    FeedbackMailer.send_message(@user).deliver_now
+    redirect_to "/feedbacks/ok"
   end
 
 end
